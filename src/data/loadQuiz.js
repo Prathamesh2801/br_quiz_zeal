@@ -31,6 +31,10 @@ export function shuffle(list) {
 function validateQuestion(raw, index) {
   const where = `question #${raw?.id ?? index + 1}`;
 
+  // JSON has no comments, so "enabled": false is how a question is parked in
+  // the file without deleting it — kept for reference, never asked.
+  if (raw && raw.enabled === false) return null;
+
   if (!raw || typeof raw.question !== "string" || !raw.question.trim()) {
     console.warn(`[quiz] skipped ${where}: missing "question" text`);
     return null;
@@ -132,9 +136,12 @@ export async function loadQuiz() {
 }
 
 /**
- * Builds one round. Every valid question in the bank is asked, shuffling only
- * changes the order, never how many — unless a debug ?limit= override trimmed
- * config.questionsPerRound below the bank size.
+ * Builds one round.
+ *
+ * Shuffle happens BEFORE the questionsPerRound slice, which is what makes
+ * "ask 15 of 29" useful: each visitor gets a different random 15 rather than
+ * the same first 15 every time. With shuffleQuestions off, the slice is
+ * simply the first N in file order.
  */
 export function buildRound({ config, questions }) {
   const ordered = config.shuffleQuestions ? shuffle(questions) : [...questions];

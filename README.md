@@ -10,10 +10,15 @@ whatever panel it runs on, so the design never reflows or distorts.
 
 ```bash
 npm install
-npm run dev      # development
-npm run build    # produces dist/
-npm run preview  # serve the built dist/ locally
+npm run dev        # development
+npm run build      # produces dist/ and br-quiz-kiosk.zip
+npm run build:only # dist/ without the zip
+npm run preview    # serve the built dist/ locally
 ```
+
+`npm run build` also writes **`br-quiz-kiosk.zip`**, the deploy bundle. It
+contains the contents of `dist/` with `index.html` at the top level, so it
+unpacks straight into XAMPP's `htdocs` with no extra folder.
 
 > The folder name contains `&`, which breaks the npm/npx shims on Windows.
 > If `npm run build` fails, call Vite directly:
@@ -28,10 +33,10 @@ Notepad, refresh the screen, and the change is live. No rebuild, no internet.
 ```jsonc
 {
   "config": {
-    // "questionsPerRound": 5,   // optional: ask only the first N. Omit it and
-                                 // every visitor is asked the whole file.
+    "questionsPerRound": 15,     // optional: ask this many. Omit it and every
+                                 // visitor is asked the whole file.
     "shuffleQuestions": true,    // ask the bank in a random order each round
-    "shuffleOptions": false,     // also shuffle A/B/C/D within a question
+    "shuffleOptions": true,      // also shuffle A/B/C/D within a question
     "showAnswerFeedback": true,  // show right/wrong immediately on tap
     "idleResetSeconds": 90       // untouched this long -> back to start (0 = off)
   },
@@ -50,15 +55,26 @@ Notepad, refresh the screen, and the change is live. No rebuild, no internet.
 `2` = C, `3` = D. A letter (`"B"`) also works if you find that easier.
 
 To **add** a question, copy a block and append it. To **remove** one, delete
-its block. To **edit** one, change the text. Every visitor is asked the whole
-bank, currently 30 questions, so adding a block lengthens the quiz and
-deleting one shortens it. There is no per-round count to keep in sync — unless
-you set `questionsPerRound`, which asks only the first N and is clamped to the
-number of questions actually in the file.
+its block. To **edit** one, change the text. To **retire** one without losing
+it, add `"enabled": false` to its block — JSON has no comments, so this is how
+a question is parked in the file but never asked.
+
+The file currently holds **29 questions** and asks **15** per visitor. The two
+settings work together:
+
+- `questionsPerRound` sets how many are asked. It is clamped to how many
+  questions the file actually contains, so a leftover number can never ask for
+  more than exist. Omit it to ask all of them.
+- `shuffleQuestions` picks that many *at random* rather than the first N in
+  file order, so with 15 of 29 each visitor gets a different set.
+- `shuffleOptions` reorders A/B/C/D within each question. The correct answer
+  follows its option, so scoring stays right.
 
 A question with a missing field or an out-of-range `answer` is skipped with a
 console warning rather than crashing the kiosk. If the whole file is invalid,
 the screen shows a readable error instead of a blank page.
+
+Avoid two identical options in one question — it makes the answer ambiguous.
 
 ### On the kiosk (XAMPP)
 
@@ -78,8 +94,17 @@ kiosk. It is the source copy, and the next `npm run build` overwrites `dist/`.
 
 ## Images
 
-See `public/assets/README.txt`. Five slots, fixed filenames, drop-in
-replacements. The files there now are grey placeholders.
+The brand artwork lives in `src/assets/` and is bundled at build time:
+
+| File                    | Where it appears                          |
+| ----------------------- | ----------------------------------------- |
+| `home_bg_design.png`    | Start screen background, full bleed       |
+| `quiz_right_design.png` | Quiz and Result, top-right curved panel   |
+| `trophy.png`            | Result screen                             |
+
+These are fixed design assets, not operator content, so changing one means
+editing the file and rebuilding. Only `data/questions.json` is meant to be
+edited on the kiosk.
 
 ## Screens
 

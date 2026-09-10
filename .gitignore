@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Kiosk deploy bundle, produced by `npm run build`
+br-quiz-kiosk.zip
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,6 +1,6 @@
 // Shared brand chrome: logo lockup, background swooshes, footers.
-// Swap the wordmark for the official SVG/PNG when you have the asset —
-// drop it in public/assets/ and replace the markup inside <Logo>.
+// The wordmark is set in type. To use official artwork instead, add it to
+// src/assets/ and replace the markup inside <Logo>.
 
 export function Logo({ member = false }) {
   return (

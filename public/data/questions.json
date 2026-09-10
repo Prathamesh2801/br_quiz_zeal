@@ -1,7 +1,8 @@
 {
   "config": {
-    "shuffleQuestions": false,
-    "shuffleOptions": false,
+    "questionsPerRound": 2,
+    "shuffleQuestions": true,
+    "shuffleOptions": true,
     "showAnswerFeedback": true,
     "idleResetSeconds": 90
   },
@@ -151,17 +152,6 @@
     },
     {
       "id": 14,
-      "question": "Why is traceability important in the food industry?",
-      "options": [
-        "To identify the origin and movement of products through the supply chain",
-        "To reduce packaging size",
-        "To increase product weight",
-        "To increase product weight"
-      ],
-      "answer": 0
-    },
-    {
-      "id": 15,
       "question": "Which framework is commonly used to develop Agentic AI systems?",
       "options": [
         "HTML and CSS",
@@ -172,7 +162,7 @@
       "answer": 1
     },
     {
-      "id": 16,
+      "id": 15,
       "question": "IIoT systems help in achieving which aspect of Industry 4.0?",
       "options": [
         "Manual data collection only",
@@ -183,7 +173,7 @@
       "answer": 1
     },
     {
-      "id": 17,
+      "id": 16,
       "question": "A manufacturing company has hundreds of SKUs and frequent changeovers. Which capability is most important for maintaining productivity?",
       "options": [
         "Higher machine speed only",
@@ -194,7 +184,7 @@
       "answer": 1
     },
     {
-      "id": 18,
+      "id": 17,
       "question": "What does a robot's 'payload' refer to?",
       "options": [
         "The robot's weight",
@@ -205,7 +195,7 @@
       "answer": 1
     },
     {
-      "id": 19,
+      "id": 18,
       "question": "OPC UA is primarily used for:",
       "options": [
         "Email communication",
@@ -216,7 +206,7 @@
       "answer": 1
     },
     {
-      "id": 20,
+      "id": 19,
       "question": "What is Agentic AI?",
       "options": [
         "AI that performs tasks autonomously based on goals",
@@ -227,7 +217,7 @@
       "answer": 0
     },
     {
-      "id": 21,
+      "id": 20,
       "question": "Which scenario is the best use case for AI in a CPG manufacturing plant?",
       "options": [
         "Replacing all safety systems",
@@ -238,7 +228,7 @@
       "answer": 3
     },
     {
-      "id": 22,
+      "id": 21,
       "question": "OPC UA uses which security mechanism?",
       "options": [
         "No encryption",
@@ -249,7 +239,7 @@
       "answer": 1
     },
     {
-      "id": 23,
+      "id": 22,
       "question": "In OPC UA architecture, what is the role of a Server?",
       "options": [
         "To request data from clients",
@@ -260,7 +250,7 @@
       "answer": 1
     },
     {
-      "id": 24,
+      "id": 23,
       "question": "Why is hygienic machine design important in food processing?",
       "options": [
         "It makes machines look better",
@@ -271,7 +261,7 @@
       "answer": 2
     },
     {
-      "id": 25,
+      "id": 24,
       "question": "In industrial settings, Agentic AI can be used for:",
       "options": [
         "Only data storage",
@@ -282,7 +272,7 @@
       "answer": 1
     },
     {
-      "id": 26,
+      "id": 25,
       "question": "OPC UA is essential for achieving:",
       "options": [
         "Manual data collection",
@@ -293,7 +283,7 @@
       "answer": 1
     },
     {
-      "id": 27,
+      "id": 26,
       "question": "Which of the following is an advantage of OPC UA over legacy OPC?",
       "options": [
         "Only works on Windows",
@@ -304,7 +294,7 @@
       "answer": 1
     },
     {
-      "id": 28,
+      "id": 27,
       "question": "Collaborative robots (Cobots) are designed to:",
       "options": [
         "Replace all human workers",
@@ -315,7 +305,7 @@
       "answer": 1
     },
     {
-      "id": 29,
+      "id": 28,
       "question": "Which statement best describes the role of digital twins in CPG manufacturing?",
       "options": [
         "They simulate and analyze machines or processes digitally",
@@ -326,7 +316,7 @@
       "answer": 0
     },
     {
-      "id": 30,
+      "id": 29,
       "question": "What is HACCP primarily designed to manage?",
       "options": [
         "Marketing campaigns",

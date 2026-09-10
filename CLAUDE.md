@@ -10,11 +10,14 @@ Offline touch-screen quiz kiosk for a vertical portrait TV (B&R Food-Tech). Reac
 
 ```bash
 npm install
-npm run dev      # dev server
-npm run build    # -> dist/
-npm run preview  # serve the built dist/
-npm run lint     # eslint (flat config, dist/ ignored)
+npm run dev        # dev server
+npm run build      # -> dist/ + br-quiz-kiosk.zip (deploy bundle)
+npm run build:only # -> dist/ only, skips the zip
+npm run preview    # serve the built dist/
+npm run lint       # eslint (flat config, dist/ ignored)
 ```
+
+`npm run build` chains `vite build` into `npm run zip`, which zips from *inside* `dist/` so `index.html` sits at the zip root and the bundle unpacks directly into `htdocs`. Both `dist/` and `br-quiz-kiosk.zip` are git-ignored.
 
 The directory name contains `&`, which breaks the npm/npx shims on Windows. If `npm run build` fails for that reason, call Vite directly: `node node_modules/vite/bin/vite.js build`.
 
@@ -32,13 +35,13 @@ There is no test suite.
 
 **Data is deliberately not bundled.** [loadQuiz.js](src/data/loadQuiz.js) fetches `public/data/questions.json` at runtime via `import.meta.env.BASE_URL`, with a `?t=` cache-buster, so an operator can edit `dist/data/questions.json` in Notepad on the kiosk and refresh, with no rebuild and no internet. The cache-buster matters: without a unique URL, Apache/XAMPP can answer the reload with its own `304 Not Modified` and the operator sees stale questions after saving. Never `import` the JSON — that would bundle it and break the whole workflow. Anything an operator may need to change at the venue belongs in `public/`, not `src/`.
 
-**Editing questions in production.** `dist/` is self-contained: serve it from XAMPP's `htdocs`, then add, remove or reword entries in `dist/data/questions.json` and refresh the screen. `questionsPerRound` is optional — leave it out and every visitor is asked the whole file, so adding or deleting a question needs no second edit; set it to ask only the first N. It is clamped to the bank size, so a stale value left after deleting questions cannot over-ask. A malformed row is skipped with a `console.warn` rather than taking the kiosk down. Keep `public/data/questions.json` in step with any kiosk edit, or the next build will overwrite it.
+**Editing questions in production.** `dist/` is self-contained: serve it from XAMPP's `htdocs`, then add, remove or reword entries in `dist/data/questions.json` and refresh the screen. `questionsPerRound` is optional — leave it out and every visitor is asked the whole file; set it to ask fewer. It is clamped to the bank size, so a stale value left after deleting questions cannot over-ask. Because `buildRound` shuffles *before* slicing, `questionsPerRound` + `shuffleQuestions` gives each visitor a different random subset rather than the same first N. `"enabled": false` on a question parks it — JSON has no comments, so that is how a row is kept in the file but never asked. A malformed row is skipped with a `console.warn` rather than taking the kiosk down. Keep `public/data/questions.json` in step with any kiosk edit, or the next build will overwrite it.
 
 **Brand art is bundled, not runtime data.** The background/decorative images (`home_bg_design.png`, `quiz_right_design.png` in [src/assets/](src/assets/)) are fixed brand-kit art, not operator content, so they are imported as normal ES modules and let Vite hash and bundle them — unlike `public/data/questions.json`. Start renders `home_bg_design.png` full-bleed in place of a separately composed photo band and thumbnail stack; Quiz and Result render `quiz_right_design.png` for the top-right curved panel, plus the code-drawn `CornerWave` for the bottom-right orange swoosh (the PNG only covers the top corner). See [docs/B&R_Quiz_assets/](docs/B&R_Quiz_assets/) for the source mockups.
 
 **Failure behaviour is a product requirement.** A malformed question row is skipped with a `console.warn` rather than throwing (`validateQuestion`); only a totally unusable file throws, and [AppLayout.jsx](src/app/AppLayout.jsx) renders a readable `BootMessage` instead of a blank screen. Keep that shape when touching the loader. `answer` accepts a 0-based index or a letter (`"B"`).
 
-**Whole bank per round, by default.** `shuffleQuestions` changes only the order, never the count (see *Editing questions in production* above for `questionsPerRound`). `?limit=5` before the `#` in the URL trims the round for a one-off test without editing the file. The Quiz screen shows a plain "Question N of M" counter rather than a segmented progress bar, which would not fit 30 segments on the canvas.
+**Round size.** The shipped file holds 29 questions and asks 15, shuffled (see *Editing questions in production* above). `shuffleQuestions` never changes the count, only which questions and in what order. `?limit=5` before the `#` in the URL trims the round for a one-off test without editing the file. The Quiz screen shows a plain "Question N of M" counter rather than a segmented progress bar, which would not fit 30 segments on the canvas.
 
 **Kiosk behaviours** that are easy to break: [useIdleReset.js](src/hooks/useIdleReset.js) returns to the start screen after `config.idleResetSeconds` of no input; `index.css` disables scrolling, selection, pinch-zoom, tap highlight and long-press callout; `index.html` locks the viewport; `base: './'` in [vite.config.js](vite.config.js) keeps `dist/` relocatable.
 
