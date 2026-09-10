@@ -1,0 +1,340 @@
+{
+  "config": {
+    "shuffleQuestions": false,
+    "shuffleOptions": false,
+    "showAnswerFeedback": true,
+    "idleResetSeconds": 90
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "What does CRA stand for?",
+      "options": [
+        "Cyber Risk Assessment",
+        "Cyber Resilience Act",
+        "Cloud Resource Authority",
+        "Certificate Registration Authority"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 2,
+      "question": "What is a major cybersecurity concern for IIoT systems?",
+      "options": [
+        "Power consumption only",
+        "Vulnerable legacy systems connected to networks",
+        "Too much automation",
+        "Excessive human involvement"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 3,
+      "question": "What is the primary difference between Agentic AI and traditional AI?",
+      "options": [
+        "Agentic AI makes decisions without human approval",
+        "Traditional AI is more powerful",
+        "Agentic AI cannot process data",
+        "There is no significant difference"
+      ],
+      "answer": 0
+    },
+    {
+      "id": 4,
+      "question": "What is the primary objective of the CRA?",
+      "options": [
+        "To increase software development costs",
+        "To enhance cybersecurity of hardware and software products",
+        "To reduce competition in the tech industry",
+        "To eliminate all digital products"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 5,
+      "question": "What does IIoT stand for?",
+      "options": [
+        "Internet of Industrial Tools",
+        "Industrial Internet of Things",
+        "Integrated Internet Operating Technology",
+        "Interactive IoT Interface"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 6,
+      "question": "What is a critical challenge in deploying Agentic AI systems?",
+      "options": [
+        "Cost of electricity",
+        "Ensuring safety and accountability of autonomous decisions",
+        "Internet connectivity only",
+        "Software licensing fees"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 7,
+      "question": "What is a major challenge for CPG manufacturers today?",
+      "options": [
+        "Increasing product variety while maintaining efficiency",
+        "Reducing the number of consumers",
+        "Eliminating packaging completely",
+        "Avoiding automation"
+      ],
+      "answer": 0
+    },
+    {
+      "id": 8,
+      "question": "Which of the following is NOT typically an IIoT component?",
+      "options": [
+        "Sensors",
+        "Controllers",
+        "Social media platforms",
+        "Gateways"
+      ],
+      "answer": 2
+    },
+    {
+      "id": 9,
+      "question": "Which of the following is a key characteristic of Agentic AI?",
+      "options": [
+        "Requires real-time human control",
+        "Can plan and execute tasks autonomously",
+        "Cannot learn from experiences",
+        "Limited to predefined responses only"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 10,
+      "question": "What does OPC UA stand for?",
+      "options": [
+        "Open Platform Communication Universal Architecture",
+        "Optimal Process Control Universal Application",
+        "Operating Platform Connectivity Utility",
+        "Open Protocol Communication Authority"
+      ],
+      "answer": 0
+    },
+    {
+      "id": 11,
+      "question": "What is the primary benefit of IIoT in manufacturing?",
+      "options": [
+        "Reduced employee morale",
+        "Real-time monitoring and predictive maintenance",
+        "Increased product weight",
+        "Elimination of quality control"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 12,
+      "question": "What does \"time-to-market\" mean in the CPG industry?",
+      "options": [
+        "Time taken to transport employees",
+        "Time from product development to commercial availability",
+        "Time required to clean a factory",
+        "Time taken to close a production line"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 13,
+      "question": "Which protocol is commonly used in IIoT networks?",
+      "options": [
+        "HTTP",
+        "MQTT",
+        "FTP",
+        "Telnet"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 14,
+      "question": "Why is traceability important in the food industry?",
+      "options": [
+        "To identify the origin and movement of products through the supply chain",
+        "To reduce packaging size",
+        "To increase product weight",
+        "To increase product weight"
+      ],
+      "answer": 0
+    },
+    {
+      "id": 15,
+      "question": "Which framework is commonly used to develop Agentic AI systems?",
+      "options": [
+        "HTML and CSS",
+        "Reinforcement Learning and decision trees",
+        "File compression algorithms",
+        "Email protocols"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 16,
+      "question": "IIoT systems help in achieving which aspect of Industry 4.0?",
+      "options": [
+        "Manual data collection only",
+        "Complete automation and data-driven decision making",
+        "Elimination of technology",
+        "Reduction in product variety"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 17,
+      "question": "A manufacturing company has hundreds of SKUs and frequent changeovers. Which capability is most important for maintaining productivity?",
+      "options": [
+        "Higher machine speed only",
+        "Flexible automation and fast changeovers",
+        "Larger warehouses",
+        "More manual operators"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 18,
+      "question": "What does a robot's 'payload' refer to?",
+      "options": [
+        "The robot's weight",
+        "The maximum weight the robot can carry",
+        "The energy consumed by the robot",
+        "The number of tasks it performs"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 19,
+      "question": "OPC UA is primarily used for:",
+      "options": [
+        "Email communication",
+        "Interoperability between industrial devices and systems",
+        "Video streaming",
+        "Social networking"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 20,
+      "question": "What is Agentic AI?",
+      "options": [
+        "AI that performs tasks autonomously based on goals",
+        "AI used only for data visualization",
+        "AI that requires constant human intervention",
+        "AI limited to chatbot applications"
+      ],
+      "answer": 0
+    },
+    {
+      "id": 21,
+      "question": "Which scenario is the best use case for AI in a CPG manufacturing plant?",
+      "options": [
+        "Replacing all safety systems",
+        "Removing quality inspections",
+        "Increasing product weight",
+        "Predicting equipment failures from machine data"
+      ],
+      "answer": 3
+    },
+    {
+      "id": 22,
+      "question": "OPC UA uses which security mechanism?",
+      "options": [
+        "No encryption",
+        "256-bit AES encryption and certificate-based authentication",
+        "Simple password protection only",
+        "Username and password in plain text"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 23,
+      "question": "In OPC UA architecture, what is the role of a Server?",
+      "options": [
+        "To request data from clients",
+        "To provide data and services to clients",
+        "To store user credentials only",
+        "To manage network cables"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 24,
+      "question": "Why is hygienic machine design important in food processing?",
+      "options": [
+        "It makes machines look better",
+        "It eliminates the need for operators",
+        "It helps prevent contamination and makes cleaning easier",
+        "It increases machine weight"
+      ],
+      "answer": 2
+    },
+    {
+      "id": 25,
+      "question": "In industrial settings, Agentic AI can be used for:",
+      "options": [
+        "Only data storage",
+        "Process optimization and predictive maintenance",
+        "Replacing all human workers only",
+        "Generating artwork exclusively"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 26,
+      "question": "OPC UA is essential for achieving:",
+      "options": [
+        "Manual data collection",
+        "Seamless data exchange in Industry 4.0 ecosystems",
+        "Elimination of computers",
+        "Reduction in internet usage"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 27,
+      "question": "Which of the following is an advantage of OPC UA over legacy OPC?",
+      "options": [
+        "Only works on Windows",
+        "Platform-independent and supports multiple operating systems",
+        "Slower data transfer",
+        "Reduced security features"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 28,
+      "question": "Collaborative robots (Cobots) are designed to:",
+      "options": [
+        "Replace all human workers",
+        "Work alongside humans safely",
+        "Operate only in extreme conditions",
+        "Eliminate quality control"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 29,
+      "question": "Which statement best describes the role of digital twins in CPG manufacturing?",
+      "options": [
+        "They simulate and analyze machines or processes digitally",
+        "hey are only used for product advertising",
+        "They eliminate the need for sensors",
+        "They physically replace production machines"
+      ],
+      "answer": 0
+    },
+    {
+      "id": 30,
+      "question": "What is HACCP primarily designed to manage?",
+      "options": [
+        "Marketing campaigns",
+        "Machine productivity",
+        "Food safety hazards",
+        "Employee attendance"
+      ],
+      "answer": 2
+    }
+  ]
+}

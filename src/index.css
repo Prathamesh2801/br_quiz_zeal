@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   B&R brand theme. Everything in the UI pulls from these tokens,
+   so a rebrand is a change here and nowhere else.
+   --------------------------------------------------------------- */
+@theme {
+  --color-br-orange: #f57c1f;
+  --color-br-orange-dark: #e06a10;
+  --color-br-orange-soft: #fff6ee;
+  --color-br-ink: #1a1a1a;
+  --color-br-slate: #3d4852;
+  --color-br-grey: #6b7480;
+  --color-br-line: #d8dce0;
+  --color-br-soft: #f4f5f7;
+  --color-br-green: #2e9e5b;
+  --color-br-green-soft: #edf8f1;
+  --color-br-red: #d64545;
+  --color-br-red-soft: #fdf0f0;
+
+  --font-sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ---------------------------------------------------------------
+   Kiosk shell: no scrolling, no text selection, no pinch-zoom,
+   no long-press callout. The screen is a touch appliance.
+   --------------------------------------------------------------- */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  background: #000;
+  font-family: var(--font-sans);
+  color: var(--color-br-ink);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Hide the mouse pointer on the kiosk; touch only. Remove this rule
+   if you need a cursor while setting the machine up. */
+.kiosk-nocursor,
+.kiosk-nocursor * {
+  cursor: none;
+}
