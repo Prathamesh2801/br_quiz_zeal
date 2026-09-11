@@ -1,6 +1,6 @@
 {
   "config": {
-    "questionsPerRound": 29,
+    "questionsPerRound": 7,
     "shuffleQuestions": true,
     "shuffleOptions": true,
     "showAnswerFeedback": true,
