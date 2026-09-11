@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { FiArrowLeft, FiArrowRight, FiCheck, FiHome, FiX } from "react-icons/fi";
@@ -11,9 +12,15 @@ import {
 import TouchButton from "../components/TouchButton";
 import { useQuiz } from "../state/quizStore";
 import { PATHS } from "../routes/paths";
+import { playSound } from "../data/sounds";
 import quizRightDesign from "../assets/quiz_right_design.png";
 
 const LETTERS = ["A", "B", "C", "D", "E", "F"];
+
+// How long the tapped option sits alone before the correct answer joins it.
+// Tuned against the cue lengths (correct 1.3s, buzzer 0.6s) so the reveal
+// lands while the sound is still audible, not after silence.
+const REVEAL_DELAY = { correct: 450, wrong: 900 };
 
 export default function Quiz() {
   const navigate = useNavigate();
@@ -31,9 +38,38 @@ export default function Quiz() {
     startRound,
   } = useQuiz();
 
+  // Two-stage feedback: the tapped option colours immediately, then the
+  // correct one is revealed a beat later. Flashing both at once reads as a
+  // single confusing blink — the visitor needs a moment to register what
+  // they picked before the answer appears next to it.
+  //
+  // The revealed flag stores which question it belongs to rather than a bare
+  // boolean, so moving to another question invalidates it without an effect
+  // having to reset it.
+  const [revealedFor, setRevealedFor] = useState(null);
+  const feedbackOn = Boolean(config?.showAnswerFeedback) && isAnswered;
+
+  useEffect(() => {
+    if (!feedbackOn) return;
+
+    const correct = selected === question?.answer;
+    playSound(correct ? "correct" : "wrong");
+
+    // A correct pick needs no explanation, so it resolves quickly; a wrong
+    // one holds longer so the red registers before the green appears.
+    const delay = correct ? REVEAL_DELAY.correct : REVEAL_DELAY.wrong;
+    const id = question?.id;
+    const timer = setTimeout(() => setRevealedFor(id), delay);
+    return () => clearTimeout(timer);
+    // question.id, not question: a new object identity each render would
+    // retrigger the sound on every re-render of the same question.
+  }, [feedbackOn, selected, question?.id, question?.answer]);
+
   if (!question) return null;
 
-  const showFeedback = config?.showAnswerFeedback && isAnswered;
+  // The picked option always colours at once; the rest of the reveal waits.
+  const showPick = feedbackOn;
+  const showAnswer = showPick && revealedFor === question.id;
 
   const onNext = () => (isLast ? navigate(PATHS.result) : next());
 
@@ -157,7 +193,8 @@ export default function Quiz() {
                     i,
                     selected,
                     answer: question.answer,
-                    showFeedback,
+                    showPick,
+                    showAnswer,
                   })}
                   locked={isAnswered}
                   onSelect={() => select(i)}
@@ -180,9 +217,11 @@ export default function Quiz() {
             Back
           </TouchButton>
 
+          {/* Held until the answer is revealed, so a fast tap on Next can't
+              skip past the reveal the delay exists to show. */}
           <TouchButton
             onClick={onNext}
-            disabled={!isAnswered}
+            disabled={!isAnswered || (showPick && !showAnswer)}
             className="h-[104px] min-w-[300px] px-[60px] text-[36px]"
           >
             {isLast ? "Finish" : "Next"}
@@ -199,14 +238,26 @@ export default function Quiz() {
   );
 }
 
-/** Which visual state an option row is in. */
-function optionState({ i, selected, answer, showFeedback }) {
-  if (showFeedback) {
+/**
+ * Which visual state an option row is in.
+ *
+ * `showPick` and `showAnswer` are separate so the tapped option can colour
+ * before the correct one is revealed. Between the two, a wrong pick shows red
+ * on its own and the others stay neutral rather than dimming early — dimming
+ * them would give the answer away before the reveal.
+ */
+function optionState({ i, selected, answer, showPick, showAnswer }) {
+  if (!showPick) return i === selected ? "selected" : "idle";
+
+  if (showAnswer) {
     if (i === answer) return "correct";
     if (i === selected) return "wrong";
     return "dim";
   }
-  return i === selected ? "selected" : "idle";
+
+  // Pick registered, answer not yet revealed.
+  if (i === selected) return i === answer ? "correct" : "wrong";
+  return "idle";
 }
 
 const OPTION_STYLES = {

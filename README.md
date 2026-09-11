@@ -37,7 +37,7 @@ Notepad, refresh the screen, and the change is live. No rebuild, no internet.
                                  // visitor is asked the whole file.
     "shuffleQuestions": true,    // ask the bank in a random order each round
     "shuffleOptions": true,      // also shuffle A/B/C/D within a question
-    "showAnswerFeedback": true,  // show right/wrong immediately on tap
+    "showAnswerFeedback": true,  // colour + sound on tap, answer revealed after
     "idleResetSeconds": 90       // untouched this long -> back to start (0 = off)
   },
   "questions": [
@@ -59,14 +59,14 @@ its block. To **edit** one, change the text. To **retire** one without losing
 it, add `"enabled": false` to its block — JSON has no comments, so this is how
 a question is parked in the file but never asked.
 
-The file currently holds **29 questions** and asks **15** per visitor. The two
-settings work together:
+The file currently holds **29 questions**. How many each visitor is asked is
+set by `questionsPerRound`, and the settings work together:
 
 - `questionsPerRound` sets how many are asked. It is clamped to how many
   questions the file actually contains, so a leftover number can never ask for
   more than exist. Omit it to ask all of them.
 - `shuffleQuestions` picks that many *at random* rather than the first N in
-  file order, so with 15 of 29 each visitor gets a different set.
+  file order, so asking 15 of 29 gives each visitor a different set.
 - `shuffleOptions` reorders A/B/C/D within each question. The correct answer
   follows its option, so scoring stays right.
 
@@ -91,6 +91,21 @@ served from Apache's cache.
 
 Keep `public/data/questions.json` in step with anything you change on the
 kiosk. It is the source copy, and the next `npm run build` overwrites `dist/`.
+
+## Answer feedback
+
+Tapping an option colours that option straight away and plays a sound — a
+chime for correct, a buzzer for wrong. The correct answer is then revealed a
+moment later, rather than at the same instant, so the visitor sees what they
+picked before the answer appears beside it. Next stays disabled until the
+reveal finishes.
+
+Set `"showAnswerFeedback": false` in the config to turn the whole thing off,
+sounds included. The sound files live in `src/assets/sounds/`; the delays are
+`REVEAL_DELAY` at the top of `src/screens/Quiz.jsx`.
+
+Audio is best-effort: if the kiosk has no sound output, or the browser blocks
+playback, the quiz carries on silently rather than erroring.
 
 ## Images
 

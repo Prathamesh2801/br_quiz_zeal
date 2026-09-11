@@ -1,6 +1,6 @@
 {
   "config": {
-    "questionsPerRound": 2,
+    "questionsPerRound": 29,
     "shuffleQuestions": true,
     "shuffleOptions": true,
     "showAnswerFeedback": true,
@@ -142,12 +142,7 @@
     {
       "id": 13,
       "question": "Which protocol is commonly used in IIoT networks?",
-      "options": [
-        "HTTP",
-        "MQTT",
-        "FTP",
-        "Telnet"
-      ],
+      "options": ["HTTP", "MQTT", "FTP", "Telnet"],
       "answer": 1
     },
     {
